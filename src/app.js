@@ -55,7 +55,7 @@ app.get('/weather', (req, res) => {
                 error: error
             });
         }
-        forecast(latitude, longitude, (error, {summary, temperature, precipProbability}) => {
+        forecast(latitude, longitude, (error, {summary, temperature, precipProbability, sunriseTime, sunsetTime}) => {
             if (error) {
                 return res.send({
                     error: error
@@ -65,7 +65,9 @@ app.get('/weather', (req, res) => {
                 address: location,
                 summary: summary + ' Temperature: ' + temperature + ' C. Rain probability: ' + precipProbability + '%',
                 forecast: 'The temperature is: ' + temperature + ' degrees C',
-                precipProbability: 'Rain probability ' + precipProbability + ' %'
+                precipProbability: 'Rain probability ' + precipProbability + ' %',
+                sunriseTime: 'Sunrise at: ' + sunriseTime,
+                sunsetTime: 'Sunset at: ' + sunsetTime
             });
         });
     });
@@ -102,5 +104,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('Server is app on port: ' +port);
+    console.log('Server is app on port: ' + port);
 });
